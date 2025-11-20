@@ -1,0 +1,47 @@
+{
+  "name": "@nebulus-db/json-schema",
+  "version": "0.2.3",
+  "description": "JSON Schema utilities for NebulusDB",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prebuild": "rm -rf dist"
+  },
+  "keywords": [
+    "json-schema",
+    "zod",
+    "validation",
+    "nebulus"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "zod": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/json-schema"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "vite": "6.3.3"
+  }
+}

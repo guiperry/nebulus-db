@@ -1,0 +1,46 @@
+{
+  "name": "@nebulus-db/plugin-sync",
+  "version": "0.2.3",
+  "description": "Synchronization plugin for NebulusDB",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prebuild": "rm -rf dist"
+  },
+  "keywords": [
+    "database",
+    "nosql",
+    "sync",
+    "offline",
+    "realtime"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2"
+  },
+  "dependencies": {
+    "@nebulus-db/core": "^0.2.0",
+    "socket.io-client": "^4.7.2",
+    "uuid": "^9.0.1",
+    "vite": "6.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/plugin-sync"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

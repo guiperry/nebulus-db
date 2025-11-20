@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NebulusDB — Fast, Flexible, and Serverless. An embedded database optimized for modern development." />
+  <meta name="author" content="NebulusDB Team" />
+  <title>NebulusDB - Fast. Flexible. Serverless.</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="logo-altocumulus.svg">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo-altocumulus.svg" alt="NebulusDB Logo">
+        <span>NebulusDB</span>
+        <div class="version-badge">v0.3.0</div>
+      </div>
+      <div class="nav-links">
+        <a href="#release">Release</a>
+        <a href="#features">Features</a>
+        <a href="#docs">Docs</a>
+        <a href="https://github.com/Nom-nom-hub/NebulusDB" target="_blank">GitHub</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="logo-container">
+          <img src="nebulusdb_v0.3.0_billow.svg" alt="NebulusDB Billow Hero" class="hero-logo" onerror="this.onerror=null;this.src='hero-altocumulus.svg';">
+          <img src="version-badge.svg" alt="v0.3.0 Billow" class="version-img">
+        </div>
+        <h1><span class="gradient-text" data-text="Fast. Flexible.">Fast. Flexible.</span><br>Serverless.</h1>
+        <p class="subtitle">The embedded database for the modern stack.</p>
+        <p class="description">
+          NebulusDB is a reactive, TypeScript-first, schema-optional, embeddable NoSQL database
+          that runs in the browser, Node.js, and Edge environments.
+        </p>
+        <div class="cta-buttons">
+          <a href="#getting-started" class="btn primary">Get Started</a>
+          <a href="https://github.com/Nom-nom-hub/NebulusDB" target="_blank" class="btn outline">GitHub</a>
+        </div>
+      </div>
+      <div class="code-container">
+        <div class="code-header">
+          <div class="code-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="code-title">Terminal</div>
+        </div>
+        <pre class="terminal-block"><code id="typed-terminal"></code><noscript>
+$ nebulus init my-app
+✔ Project initialized in my-app/
+$ nebulus generate:adapter my-adapter
+✔ Adapter my-adapter created
+$ nebulus migrate
+✔ All migrations applied
+$ node
+> import { createDb } from '@nebulus/core';
+> import { MemoryAdapter } from '@nebulus/adapter-memorydb';
+> import { createMigrationPlugin, getSchemaVersion } from '@nebulus/plugin-migration';
+> // Billow: Migrations & advanced indexes
+> const migrations = [
+>   { version: 1, name: "Add email", async up(db) { /* ... */ } },
+>   { version: 2, name: "Add createdAt", async up(db) { /* ... */ } }
+> ];
+> const db = createDb({
+>   adapter: new MemoryAdapter(),
+>   plugins: [createMigrationPlugin(migrations)]
+> });
+> const users = db.collection("users", {
+>   indexes: [
+>     { name: "name_age_idx", fields: ["name", "age"], type: "compound" },
+>     { name: "active_idx", fields: ["lastActive"], type: "single", options: { partial: { filter: { active: true } } } }
+>   ]
+> });
+> await users.insert({ name: "Alice", age: 30, active: true });
+> await users.insert({ name: "Bob", age: 25, active: false });
+> const results = await users.find({ name: { $gte: "A", $lte: "M" }, age: { $gt: 20 } });
+> const version = await getSchemaVersion(db, "users");
+> console.log("Schema version:", version);
+> users.subscribe({ active: true }, (activeUsers) => {
+>   console.log("Active users:", activeUsers);
+> });</noscript></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="release" class="release">
+    <div class="container">
+      <h2>Introducing <span class="gradient-text" data-text='v0.3.0 "Billow"'>v0.3.0 "Billow"</span></h2>
+      <p class="section-intro">
+        Our latest release brings advanced indexing, schema versioning, migration support, and major devtools improvements—all with our signature cloud-themed naming scheme.
+      </p>
+
+      <div class="release-content">
+        <div class="release-info">
+          <h3>Cloud-Themed Releases</h3>
+          <p>
+            All NebulusDB releases are named after types of clouds, reflecting our commitment to building a database that's as flexible and powerful as the sky.
+          </p>
+          <p>
+            "Billow" represents rolling, layered cloud formations—mirroring our new multi-layered indexing and migration features.
+          </p>
+          <div class="release-timeline">
+            <div class="release-item previous">
+              <div class="release-dot"></div>
+              <p>Previous: v0.2.2 "Altocumulus"</p>
+            </div>
+            <div class="release-item current">
+              <div class="release-dot"></div>
+              <p>Current: v0.3.0 "Billow" <span style="font-size:0.7em;color:#888;">(July 1, 2025)</span></p>
+            </div>
+            <div class="release-item">
+              <div class="release-dot"></div>
+              <p>Future: v0.4.0 "Cirrus"</p>
+            </div>
+          </div>
+        </div>
+        <div class="release-image">
+          <img src="nebulusdb_v0.3.0_billow.svg" alt="NebulusDB v0.3.0 Billow" onerror="this.onerror=null;this.src='nebulusdb_v0.2.2_altocumulus_no_button.png';">
+        </div>
+      </div>
+
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h3>Advanced Indexing</h3>
+          <p>Compound, partial, and multi-field indexes. Efficient partial prefix and multi-field range queries. All scenarios covered by robust tests.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗂️</div>
+          <h3>Schema Versioning & Migrations</h3>
+          <p>Per-collection schema version tracking. Migration plugin with helpers and migration history. Automated and manual migration support.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛠️</div>
+          <h3>Devtools Improvements</h3>
+          <p>Index metadata and schema version visible in the UI. Migration history for each collection. Cleaner, more informative dashboards.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💡</div>
+          <h3>Developer Experience</h3>
+          <p>Improved test coverage and monorepo coverage reporting. Cleaner code, better types, and up-to-date documentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Key Features</h2>
+      <p class="section-intro">
+        NebulusDB combines the best of NoSQL databases with modern TypeScript features.
+      </p>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h3>TypeScript-First</h3>
+          <p>Built from the ground up with TypeScript, providing excellent type safety and developer experience.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Reactive Queries</h3>
+          <p>Subscribe to data changes and automatically update your UI when the underlying data changes.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Multiple Adapters</h3>
+          <p>Use the same API with different storage backends: Memory, IndexedDB, SQLite, FileSystem, Redis, and more.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Plugin Architecture</h3>
+          <p>Extend functionality with plugins for validation, encryption, versioning, caching, and more.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Schema Optional</h3>
+          <p>Work with or without schemas, with full support for runtime validation when needed.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Edge Compatible</h3>
+          <p>Run in browsers, Node.js, or edge environments with the same consistent API.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Advanced Indexing</h3>
+          <p>Compound, partial, and multi-field indexes. Efficient partial prefix and multi-field range queries. Automatic index selection for optimal performance.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Schema Versioning</h3>
+          <p>Per-collection schema version tracking and helpers for managing schema changes over time.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Migration Plugin</h3>
+          <p>Automate and track schema/data migrations with migration history and zero-downtime upgrades.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Devtools</h3>
+          <p>Visualize collections, indexes, schema versions, and migration history. Debug and optimize queries in the UI.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Batch Operations</h3>
+          <p>Insert, update, or delete many documents at once for high performance and reduced overhead.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Adaptive Concurrency</h3>
+          <p>Automatically tunes concurrency for optimal throughput based on system performance and workload.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Document Compression</h3>
+          <p>Automatically compresses large documents to save memory and improve performance.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Memory Management</h3>
+          <p>Efficient memory usage, chunked processing, and memory-efficient indexes for large datasets.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Query Optimization</h3>
+          <p>Query planning, caching, and short-circuit evaluation for fast and efficient queries.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Live Query Subscriptions</h3>
+          <p>Subscribe to any query and receive real-time updates as data changes.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Cloud-Themed Branding</h3>
+          <p>Each release is named after a cloud type, with unique visuals and a clear roadmap.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Extensive Test Coverage</h3>
+          <p>Robust tests for all features, including advanced indexing and migrations, ensure reliability.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Open Source</h3>
+          <p>MIT-licensed and community-driven. Contributions and feedback are welcome!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" class="docs">
+    <div class="container">
+      <h2>Documentation</h2>
+      <p class="section-intro">
+        Get started quickly with our comprehensive documentation.
+      </p>
+      <div class="docs-links">
+        <a href="README.html" class="docs-link">
+          <h3>Getting Started</h3>
+          <p>Learn the basics of NebulusDB and set up your first database.</p>
+        </a>
+        <a href="api-reference.html" class="docs-link">
+          <h3>API Reference</h3>
+          <p>Detailed documentation of all NebulusDB APIs and options.</p>
+        </a>
+        <a href="examples.html" class="docs-link">
+          <h3>Examples</h3>
+          <p>Real-world examples and code snippets to help you build your application.</p>
+        </a>
+        <a href="advanced-usage.html" class="docs-link">
+          <h3>Advanced Usage</h3>
+          <p>Performance, indexing, migrations, and advanced patterns.</p>
+        </a>
+        <a href="adapters.html" class="docs-link">
+          <h3>Adapters Guide</h3>
+          <p>How to use and implement storage adapters (Memory, IndexedDB, FileSystem, etc.).</p>
+        </a>
+        <a href="plugins.html" class="docs-link">
+          <h3>Plugins Guide</h3>
+          <p>Extend NebulusDB with validation, encryption, versioning, and custom plugins.</p>
+        </a>
+        <a href="migration-guide.html" class="docs-link">
+          <h3>Migration Guide</h3>
+          <p>How to migrate data and schemas between versions using the migration plugin.</p>
+        </a>
+        <a href="performance.html" class="docs-link">
+          <h3>Performance</h3>
+          <p>Tips and techniques for optimizing NebulusDB performance.</p>
+        </a>
+        <a href="indexing.html" class="docs-link">
+          <h3>Indexing</h3>
+          <p>Deep dive into NebulusDB's indexing system and best practices.</p>
+        </a>
+        <a href="new-adapters.html" class="docs-link">
+          <h3>Writing New Adapters</h3>
+          <p>Step-by-step guide to creating your own storage adapters.</p>
+        </a>
+        <a href="new-plugins.html" class="docs-link">
+          <h3>Writing New Plugins</h3>
+          <p>How to build and integrate custom plugins for NebulusDB.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="logo-altocumulus.svg" alt="NebulusDB Logo">
+          <span>NebulusDB</span>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h3>Documentation</h3>
+            <ul>
+              <li><a href="README.html">Getting Started</a></li>
+              <li><a href="api-reference.html">API Reference</a></li>
+              <li><a href="examples.html">Examples</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Community</h3>
+            <ul>
+              <li><a href="https://github.com/Nom-nom-hub/NebulusDB" target="_blank">GitHub</a></li>
+              <li><a href="https://github.com/Nom-nom-hub/NebulusDB/issues" target="_blank">Issues</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Releases</h3>
+            <ul>
+              <li><span class="current-release">v0.3.0 "Billow"</span></li>
+              <li><span>v0.2.2 "Altocumulus"</span></li>
+              <li><a href="https://github.com/Nom-nom-hub/NebulusDB/blob/main/LICENSE" target="_blank">MIT License</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 NebulusDB. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+  const terminalLines = [
+    '$ nebulus init my-app',
+    '✔ Project initialized in my-app/',
+    '$ nebulus generate:adapter my-adapter',
+    '✔ Adapter my-adapter created',
+    '$ nebulus migrate',
+    '✔ All migrations applied',
+    '$ node',
+    '> import { createDb } from "@nebulus/core";',
+    '> import { MemoryAdapter } from "@nebulus/adapter-memorydb";',
+    '> import { createMigrationPlugin, getSchemaVersion } from "@nebulus/plugin-migration";',
+    '> // Billow: Migrations & advanced indexes',
+    '> const migrations = [',
+    '>   { version: 1, name: "Add email", async up(db) { /* ... */ } },',
+    '>   { version: 2, name: "Add createdAt", async up(db) { /* ... */ } }',
+    '> ];',
+    '> const db = createDb({',
+    '>   adapter: new MemoryAdapter(),',
+    '>   plugins: [createMigrationPlugin(migrations)]',
+    '> });',
+    '> const users = db.collection("users", {',
+    '>   indexes: [',
+    '>     { name: "name_age_idx", fields: ["name", "age"], type: "compound" },',
+    '>     { name: "active_idx", fields: ["lastActive"], type: "single", options: { partial: { filter: { active: true } } } }',
+    '>   ]',
+    '> });',
+    '> await users.insert({ name: "Alice", age: 30, active: true });',
+    '> await users.insert({ name: "Bob", age: 25, active: false });',
+    '> const results = await users.find({ name: { $gte: "A", $lte: "M" }, age: { $gt: 20 } });',
+    '> const version = await getSchemaVersion(db, "users");',
+    '> console.log("Schema version:", version);',
+    '> users.subscribe({ active: true }, (activeUsers) => {',
+    '>   console.log("Active users:", activeUsers);',
+    '> });',
+  ];
+  const terminalElem = document.getElementById('typed-terminal');
+  let tLine = 0;
+  let terminalOutput = [];
+  function typeTerminalLine() {
+    if (tLine < terminalLines.length) {
+      let line = terminalLines[tLine];
+      let i = 0;
+      function typeChar() {
+        if (i <= line.length) {
+          let prompt = '';
+          if (line.startsWith('$')) prompt = '<span style="color:#22d3ee">$</span>';
+          else if (line.startsWith('✔')) prompt = '<span style="color:#a7f3d0">✔</span>';
+          else if (line.startsWith('>')) prompt = '<span style="color:#a3e635">&gt;</span>';
+          // Build up the output as an array of lines
+          let lines = terminalOutput.slice();
+          lines[tLine] = prompt + line.replace(/^[$✔>]/, '').slice(0, i);
+          terminalElem.innerHTML = lines.join('<br>');
+          i++;
+          setTimeout(typeChar, line[i-1] === '\n' ? 60 : 12);
+        } else {
+          // After finishing the line, add it to the output and move to next
+          let prompt = '';
+          if (line.startsWith('$')) prompt = '<span style="color:#22d3ee">$</span>';
+          else if (line.startsWith('✔')) prompt = '<span style="color:#a7f3d0">✔</span>';
+          else if (line.startsWith('>')) prompt = '<span style="color:#a3e635">&gt;</span>';
+          terminalOutput[tLine] = prompt + line.replace(/^[$✔>]/, '');
+          tLine++;
+          setTimeout(typeTerminalLine, 250);
+        }
+      }
+      typeChar();
+    }
+  }
+  if (terminalElem) typeTerminalLine();
+  </script>
+</body>
+</html>

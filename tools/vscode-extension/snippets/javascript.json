@@ -1,0 +1,125 @@
+{
+  "NebulusDB Create Database": {
+    "prefix": "ndb-create-db",
+    "body": [
+      "const { createDatabase } = require('@nebulus-db/nebulus-db');",
+      "",
+      "const db = createDatabase({",
+      "  adapter: ${1:'memory'}, // 'memory', 'indexeddb', 'sqlite', 'redis'",
+      "  options: {",
+      "    ${2:// adapter-specific options}",
+      "  }",
+      "});",
+      "$0"
+    ],
+    "description": "Create a new NebulusDB database instance"
+  },
+  "NebulusDB Create Collection": {
+    "prefix": "ndb-collection",
+    "body": [
+      "const ${1:collectionName} = db.collection('${2:collectionName}', {",
+      "  schema: {",
+      "    $3",
+      "  },",
+      "  indexes: [${4:'field1', 'field2'}]",
+      "});",
+      "$0"
+    ],
+    "description": "Create a new NebulusDB collection"
+  },
+  "NebulusDB Insert Document": {
+    "prefix": "ndb-insert",
+    "body": [
+      "await ${1:collection}.insert({",
+      "  ${2:field}: ${3:value},$0",
+      "});"
+    ],
+    "description": "Insert a document into a NebulusDB collection"
+  },
+  "NebulusDB Find Documents": {
+    "prefix": "ndb-find",
+    "body": [
+      "const ${1:results} = await ${2:collection}.find({",
+      "  ${3:field}: ${4:value},$0",
+      "});"
+    ],
+    "description": "Find documents in a NebulusDB collection"
+  },
+  "NebulusDB Update Documents": {
+    "prefix": "ndb-update",
+    "body": [
+      "await ${1:collection}.update(",
+      "  { ${2:field}: ${3:value} }, // query",
+      "  { $set: { ${4:updateField}: ${5:updateValue} } }$0",
+      ");"
+    ],
+    "description": "Update documents in a NebulusDB collection"
+  },
+  "NebulusDB Delete Documents": {
+    "prefix": "ndb-delete",
+    "body": [
+      "await ${1:collection}.remove({",
+      "  ${2:field}: ${3:value},$0",
+      "});"
+    ],
+    "description": "Delete documents from a NebulusDB collection"
+  },
+  "NebulusDB Reactive Query": {
+    "prefix": "ndb-reactive",
+    "body": [
+      "const ${1:subscription} = ${2:collection}.findReactive({",
+      "  ${3:field}: ${4:value},$0",
+      "}).subscribe(${5:results} => {",
+      "  console.log('Query results updated:', ${5:results});",
+      "});"
+    ],
+    "description": "Create a reactive query with NebulusDB"
+  },
+  "NebulusDB Complete Example": {
+    "prefix": "ndb-example",
+    "body": [
+      "const { createDatabase } = require('@nebulus-db/nebulus-db');",
+      "",
+      "// Create database instance",
+      "const db = createDatabase();",
+      "",
+      "// Create a collection",
+      "const users = db.collection('users', {",
+      "  schema: {",
+      "    id: { type: 'string', optional: true },",
+      "    name: { type: 'string' },",
+      "    email: { type: 'string' },",
+      "    age: { type: 'number' }",
+      "  },",
+      "  indexes: ['email']",
+      "});",
+      "",
+      "// Example usage",
+      "async function main() {",
+      "  // Insert a document",
+      "  await users.insert({",
+      "    name: 'Alice',",
+      "    email: 'alice@example.com',",
+      "    age: 30",
+      "  });",
+      "",
+      "  // Find documents",
+      "  const results = await users.find({ age: { $gt: 25 } });",
+      "  console.log('Query results:', results);",
+      "",
+      "  // Update documents",
+      "  await users.update(",
+      "    { email: 'alice@example.com' },",
+      "    { $set: { age: 31 } }",
+      "  );",
+      "",
+      "  // Delete documents",
+      "  await users.remove({ email: 'alice@example.com' });",
+      "}",
+      "",
+      "main().catch(console.error);",
+      "$0"
+    ],
+    "description": "Complete NebulusDB usage example"
+  }
+}

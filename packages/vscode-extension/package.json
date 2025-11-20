@@ -1,0 +1,108 @@
+{
+  "name": "nebulus-db-vscode",
+  "displayName": "NebulusDB Tools",
+  "description": "Tools for working with NebulusDB in VS Code",
+  "version": "0.2.3",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onCommand:nebulus-db.showSchemaPreview",
+    "onCommand:nebulus-db.openDevTools"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nebulus-db.showSchemaPreview",
+        "title": "NebulusDB: Show Schema Preview"
+      },
+      {
+        "command": "nebulus-db.openDevTools",
+        "title": "NebulusDB: Open DevTools"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nebulus-db-explorer",
+          "title": "NebulusDB Explorer",
+          "icon": "resources/database.svg"
+        }
+      ]
+    },
+    "views": {
+      "nebulus-db-explorer": [
+        {
+          "id": "nebulus-db-schemas",
+          "name": "Schemas"
+        },
+        {
+          "id": "nebulus-db-plugins",
+          "name": "Plugins"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == typescript || resourceLangId == javascript",
+          "command": "nebulus-db.showSchemaPreview",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "NebulusDB",
+      "properties": {
+        "nebulusDB.devtools.port": {
+          "type": "number",
+          "default": 3333,
+          "description": "Port to use for NebulusDB DevTools"
+        },
+        "nebulusDB.schemaPreview.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable schema preview"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^20.11.5",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
+    "glob": "^10.3.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@nebulus-db/core": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/vscode-extension"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Nom-nom-hub"
+}

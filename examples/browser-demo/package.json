@@ -1,0 +1,17 @@
+{
+  "name": "nebulus-browser-demo",
+  "version": "0.1.0",
+  "description": "Browser demo for NebulusDB",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@nebulus-db/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.10"
+  }
+}

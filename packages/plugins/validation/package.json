@@ -1,0 +1,47 @@
+{
+  "name": "@nebulus-db/plugin-validation",
+  "version": "0.2.3",
+  "description": "Schema validation plugin for NebulusDB using Zod",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/plugins/validation"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prebuild": "rm -rf dist"
+  },
+  "keywords": [
+    "database",
+    "nosql",
+    "validation",
+    "plugin",
+    "zod"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2"
+  },
+  "dependencies": {
+    "vite": "6.3.3",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "@nebulus-db/core": "^0.2.2"
+  }
+}

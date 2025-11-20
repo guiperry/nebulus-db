@@ -1,0 +1,62 @@
+{
+  "name": "@nebulus-db/core",
+  "version": "0.2.5",
+  "description": "Core package for NebulusDB",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "browser": "./dist/browser-adapter.js",
+      "node": "./dist/node-adapter.js",
+      "default": "./dist/index.js"
+    },
+    "./browser-adapter": "./dist/browser-adapter.js",
+    "./node-adapter": "./dist/node-adapter.js"
+  },
+  "browser": {
+    "better-sqlite3": false,
+    "fs": false,
+    "path": false
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsup src/index.ts src/browser-adapter.ts src/node-adapter.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "database",
+    "nosql",
+    "embedded",
+    "typescript"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "@nebulus-db/adapter-sqlite": "^0.2.3",
+    "ts-loader": "^9.5.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@preact/signals-core": "^1.5.1",
+    "vite": "6.3.3"
+  }
+}

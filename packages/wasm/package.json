@@ -1,0 +1,46 @@
+{
+  "name": "@nebulus-db/wasm",
+  "version": "0.2.3",
+  "description": "WebAssembly support for NebulusDB",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build:wasm": "cd wasm && wasm-pack build --target web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prebuild": "rm -rf dist"
+  },
+  "keywords": [
+    "database",
+    "nosql",
+    "wasm",
+    "webassembly",
+    "performance"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2"
+  },
+  "dependencies": {
+    "@nebulus-db/core": "^0.2.0",
+    "vite": "6.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/wasm"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

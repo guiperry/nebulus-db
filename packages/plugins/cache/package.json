@@ -1,0 +1,45 @@
+{
+  "name": "@nebulus-db/plugin-cache",
+  "version": "0.2.3",
+  "description": "Query caching plugin for NebulusDB",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prebuild": "rm -rf dist"
+  },
+  "keywords": [
+    "database",
+    "nosql",
+    "cache",
+    "plugin"
+  ],
+  "author": "Nom-nom-hub",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.2"
+  },
+  "peerDependencies": {
+    "@nebulus-db/core": "^0.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nom-nom-hub/NebulusDB.git",
+    "directory": "packages/plugins/cache"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "vite": "6.3.3"
+  }
+}
