@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { createDb } from '../../packages/core/src';
-import { MemoryAdapter } from '../../packages/core/src';
+import { InMemoryAdapter } from '../../packages/core/src';
 import { performance } from 'perf_hooks';
 
 describe('Indexing Performance Tests', () => {
@@ -12,7 +12,7 @@ describe('Indexing Performance Tests', () => {
   // Setup test data
   beforeEach(async () => {
     // Create database
-    db = createDb({ adapter: new MemoryAdapter() });
+    db = createDb({ adapter: new InMemoryAdapter() });
     
     // Create collection without indexes
     collection = db.collection('items_no_index');

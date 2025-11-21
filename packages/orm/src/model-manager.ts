@@ -54,14 +54,14 @@ export class ModelManager {
     });
 
     Object.defineProperty(modelClass, 'findOne', {
-      value: async (query) => {
+      value: async (query: any) => {
         const doc = await collection.findOne(query);
         return doc ? this.mapToModel(modelClass, doc) : null;
       }
     });
 
     Object.defineProperty(modelClass, 'findById', {
-      value: async (id) => {
+      value: async (id: any) => {
         const doc = await collection.findOne({ id });
         return doc ? this.mapToModel(modelClass, doc) : null;
       }
@@ -123,22 +123,22 @@ export class ModelManager {
       // Skip undefined values
       if (value === undefined) {
         // If field is required and has no default, throw error
-        if (fieldMeta.required && fieldMeta.default === undefined) {
+        if ((fieldMeta as any).required && (fieldMeta as any).default === undefined) {
           throw new Error(`Field ${fieldName} is required.`);
         }
 
         // Use default value if provided
-        if (fieldMeta.default !== undefined) {
-          doc[fieldName] = typeof fieldMeta.default === 'function'
-            ? fieldMeta.default()
-            : fieldMeta.default;
+        if ((fieldMeta as any).default !== undefined) {
+          doc[fieldName] = typeof (fieldMeta as any).default === 'function'
+            ? (fieldMeta as any).default()
+            : (fieldMeta as any).default;
         }
 
         continue;
       }
 
       // Validate field value if validator is provided
-      if (fieldMeta.validate && !await fieldMeta.validate(value)) {
+      if ((fieldMeta as any).validate && !await (fieldMeta as any).validate(value)) {
         throw new Error(`Validation failed for field ${fieldName}.`);
       }
 
@@ -202,6 +202,10 @@ export class ModelManager {
    * Get a collection by name
    */
   getCollection(name: string): ICollection {
-    return this.collections.get(name);
+    const collection = this.collections.get(name);
+    if (!collection) {
+      throw new Error(`Collection ${name} not found`);
+    }
+    return collection;
   }
 }

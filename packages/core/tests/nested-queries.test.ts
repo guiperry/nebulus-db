@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { createDb, InMemoryAdapter } from '../src';
 
 describe('Nested Queries', () => {
-  let db;
-  let collection;
+  let db: any;
+  let collection: any;
 
   beforeEach(async () => {
     db = createDb({ adapter: new InMemoryAdapter() });
@@ -102,7 +102,7 @@ describe('Nested Queries', () => {
     });
     
     expect(results).toHaveLength(2);
-    expect(results.map(r => r.id).sort()).toEqual(['1', '3']);
+    expect(results.map((r: any) => r.id).sort()).toEqual(['1', '3']);
   });
 
   it('should query nested arrays with $contains', async () => {
@@ -125,7 +125,7 @@ describe('Nested Queries', () => {
     });
     
     expect(results).toHaveLength(2);
-    expect(results.map(r => r.id).sort()).toEqual(['1', '3']);
+    expect(results.map((r: any) => r.id).sort()).toEqual(['1', '3']);
   });
 
   it('should query with complex nested conditions', async () => {

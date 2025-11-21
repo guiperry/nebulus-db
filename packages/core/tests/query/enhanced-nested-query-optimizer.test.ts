@@ -36,9 +36,9 @@ describe('EnhancedNestedQueryOptimizer', () => {
       const optimized = EnhancedNestedQueryOptimizer.optimizeQuery(query);
 
       // Should remove duplicate condition
-      expect(optimized.$and.length).toBe(2);
-      expect(optimized.$and.some(c => c.age && c.age.$gt === 30)).toBeTruthy();
-      expect(optimized.$and.some(c => c.name === 'John')).toBeTruthy();
+      expect(optimized.$and?.length).toBe(2);
+      expect(optimized.$and?.some(c => c.age && c.age.$gt === 30)).toBeTruthy();
+      expect(optimized.$and?.some(c => c.name === 'John')).toBeTruthy();
     });
 
     test('should merge compatible conditions', () => {
@@ -53,13 +53,13 @@ describe('EnhancedNestedQueryOptimizer', () => {
       const optimized = EnhancedNestedQueryOptimizer.optimizeQuery(query);
 
       // Should merge age conditions
-      expect(optimized.$and.length).toBe(2);
+      expect(optimized.$and?.length).toBe(2);
 
-      const ageCondition = optimized.$and.find(c => c.age);
-      expect(ageCondition.age.$gt).toBe(30);
-      expect(ageCondition.age.$lt).toBe(50);
+      const ageCondition = optimized.$and?.find(c => c.age);
+      expect(ageCondition?.age?.$gt).toBe(30);
+      expect(ageCondition?.age?.$lt).toBe(50);
 
-      expect(optimized.$and.some(c => c.name === 'John')).toBeTruthy();
+      expect(optimized.$and?.some(c => c.name === 'John')).toBeTruthy();
     });
   });
 

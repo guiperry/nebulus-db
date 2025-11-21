@@ -91,7 +91,7 @@ export async function initProject(directory: string): Promise<void> {
     
     // Add adapter dependency
     if (adapter !== 'memory') {
-      packageJson.dependencies[`@nebulus/adapter-${adapter}`] = '^0.1.0';
+      (packageJson.dependencies as any)[`@nebulus/adapter-${adapter}`] = '^0.1.0';
     }
     
     // Add TypeScript dependencies if needed
@@ -257,7 +257,7 @@ Thumbs.db
     console.log(`2. npm install`);
     console.log(`3. npm start`);
     
-  } catch (error) {
+  } catch (error: any) {
     spinner.fail(`Failed to initialize project: ${error.message}`);
     throw error;
   }

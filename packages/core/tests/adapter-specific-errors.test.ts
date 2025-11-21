@@ -67,7 +67,7 @@ describe('Adapter-Specific Error Conditions Tests', () => {
       expect(allUsers).toBeTruthy();
       expect(Array.isArray(allUsers)).toBe(true);
 
-    } catch (error) {
+    } catch (error: any) {
       // If an error occurs, it should be handled gracefully
       // The exact behavior depends on the implementation
       console.log('Error during memory pressure test:', error);
@@ -97,7 +97,7 @@ describe('Adapter-Specific Error Conditions Tests', () => {
     try {
       await db.save();
       // If we get here, the save didn't fail as expected
-    } catch (error) {
+    } catch (error: any) {
       // Expected permission error
       expect(error.message).toContain('permission denied');
 
@@ -127,7 +127,7 @@ describe('Adapter-Specific Error Conditions Tests', () => {
     try {
       await db.save();
       // If we get here, the save didn't fail as expected
-    } catch (error) {
+    } catch (error: any) {
       // Expected quota error
       expect(error.message).toContain('quota');
 
@@ -157,7 +157,7 @@ describe('Adapter-Specific Error Conditions Tests', () => {
     try {
       await db.save();
       // If we get here, the save didn't fail as expected
-    } catch (error) {
+    } catch (error: any) {
       // Expected locked database error
       expect(error.message).toContain('locked');
 
@@ -182,7 +182,7 @@ describe('Adapter-Specific Error Conditions Tests', () => {
     try {
       createDb({ adapter: new FailingAdapter() as any });
       // If we get here, the initialization didn't fail as expected
-    } catch (error) {
+    } catch (error: any) {
       // Expected initialization error
       expect(error.message).toContain('Failed to initialize adapter');
 

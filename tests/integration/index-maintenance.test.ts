@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { createDb } from '../../packages/core/src';
-import { MemoryAdapter } from '../../packages/core/src';
+import { InMemoryAdapter } from '../../packages/core/src';
 
 describe('Index Maintenance Tests', () => {
   let db: any;
@@ -11,7 +11,7 @@ describe('Index Maintenance Tests', () => {
     vi.resetModules();
 
     // Create database with memory adapter
-    db = createDb({ adapter: new MemoryAdapter() });
+    db = createDb({ adapter: new InMemoryAdapter() });
 
     // Create collection with indexes
     collection = db.collection('users', {
@@ -41,7 +41,7 @@ describe('Index Maintenance Tests', () => {
 
   it('should update single field indexes during batch operations', async () => {
     // Create a new collection for this test to ensure isolation
-    const db = createDb({ adapter: new MemoryAdapter() });
+    const db = createDb({ adapter: new InMemoryAdapter() });
     const testCollection = db.collection('test_batch_updates');
     (testCollection as any).createIndex({ name: 'age_idx', fields: ['age'], type: 'single' });
 
@@ -74,7 +74,7 @@ describe('Index Maintenance Tests', () => {
 
   it('should maintain compound indexes during partial updates', async () => {
     // Create a new collection for this test to ensure isolation
-    const db = createDb({ adapter: new MemoryAdapter() });
+    const db = createDb({ adapter: new InMemoryAdapter() });
     const testCollection = db.collection('test_compound_updates');
     (testCollection as any).createIndex({ name: 'name_country_idx', fields: ['name', 'country'], type: 'compound' });
 

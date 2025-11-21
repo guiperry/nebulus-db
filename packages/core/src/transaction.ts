@@ -110,7 +110,7 @@ export class Transaction {
 
         switch (op.type) {
           case 'insert':
-            await coll.insert(op.document);
+            await coll.insert(op.document as Omit<Document, 'id'> & { id?: string });
             break;
           case 'update':
             await coll.update(op.document, {});

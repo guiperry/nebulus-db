@@ -259,7 +259,7 @@ MIT
     console.log(`\nThen import it in your project:`);
     console.log(`import { ${functionName} } from '@nebulus/plugin-${pluginName}';`);
     
-  } catch (error) {
+  } catch (error: any) {
     spinner.fail(`Failed to generate plugin: ${error.message}`);
     throw error;
   }

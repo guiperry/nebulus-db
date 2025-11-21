@@ -44,7 +44,7 @@ export async function runMigrations(directory: string, configPath: string): Prom
     let config;
     try {
       config = require(configFile);
-    } catch (error) {
+    } catch (error: any) {
       spinner.fail(`Failed to load configuration file: ${error.message}`);
       return;
     }
@@ -81,7 +81,7 @@ export async function runMigrations(directory: string, configPath: string): Prom
     console.log('\nMigration execution is not yet implemented.');
     console.log('This feature will be available in a future release.');
     
-  } catch (error) {
+  } catch (error: any) {
     spinner.fail(`Failed to run migrations: ${error.message}`);
     throw error;
   }

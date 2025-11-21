@@ -62,7 +62,7 @@ export class Index {
       }
 
       // Add to unique values map
-      this.uniqueValues.set(String(key), doc.id);
+      this.uniqueValues.set(String(key), String(doc.id));
     }
 
     // Add to entries map
@@ -70,7 +70,7 @@ export class Index {
       this.entries.set(key, new Set());
     }
 
-    this.entries.get(key)?.add(doc.id);
+    this.entries.get(key)?.add(String(doc.id));
   }
 
   /**
@@ -89,7 +89,7 @@ export class Index {
     // Remove from entries map
     const ids = this.entries.get(key);
     if (ids) {
-      ids.delete(doc.id);
+      ids.delete(String(doc.id));
       if (ids.size === 0) {
         this.entries.delete(key);
       }
@@ -321,7 +321,7 @@ export class IndexManager {
 
       if (matchingIds !== null) {
         // Use the index to filter documents
-        const indexedResults = allDocs.filter(doc => matchingIds.has(doc.id));
+        const indexedResults = allDocs.filter(doc => matchingIds.has(String(doc.id)));
 
         // Further filter the results with the full query
         return indexedResults.filter(doc => matchDocument(doc, query));
@@ -368,13 +368,12 @@ export class IndexManager {
       return this.indexes.get(indexName)!;
     }
 
-    const index = new CompositeIndex(fields);
-    this.indexes.set(indexName, index);
-    
-    // Index existing documents
-    this.documents.forEach(doc => {
-      index.addDocument(doc);
+    const index = new Index({
+      name: indexName,
+      fields: fields,
+      type: IndexType.COMPOUND
     });
+    this.indexes.set(indexName, index);
     
     return index;
   }
@@ -392,15 +391,12 @@ export class IndexManager {
       return this.indexes.get(indexName)!;
     }
 
-    const index = new PartialIndex(field, filterQuery);
-    this.indexes.set(indexName, index);
-    
-    // Index existing documents that match the filter
-    this.documents.forEach(doc => {
-      if (matchDocument(doc, filterQuery)) {
-        index.addDocument(doc);
-      }
+    const index = new Index({
+      name: indexName,
+      fields: [field],
+      type: IndexType.SINGLE
     });
+    this.indexes.set(indexName, index);
     
     return index;
   }

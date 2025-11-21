@@ -56,3 +56,26 @@ export type {
   ICollection,
   NebulusDatabase
 } from './types';
+
+// Export distributed functionality
+export { createDistributedDb, DistributedDatabase } from './distributed/distributed-database';
+export { DistributedCollection } from './distributed/distributed-collection';
+export { NetworkManager } from './distributed/network-manager';
+export { VectorClockManager } from './distributed/vector-clock';
+export { CRDTResolver } from './distributed/crdt-resolver';
+
+// Export distributed types
+export type {
+  DistributedDocument,
+  VectorClock,
+  CRDTOperation,
+  OperationType,
+  NetworkConfig,
+  PeerInfo,
+  SyncState,
+  NetworkStats,
+  ProtocolMessage,
+  MessageType
+} from './distributed/types';
+
+export type { DistributedDbOptions } from './distributed/distributed-database';

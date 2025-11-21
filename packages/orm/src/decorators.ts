@@ -2,10 +2,10 @@ import 'reflect-metadata';
 import { IndexType } from '@nebulus-db/core';
 
 // Metadata keys
-const MODEL_META_KEY = 'nebulus:model';
-const FIELD_META_KEY = 'nebulus:field';
-const INDEX_META_KEY = 'nebulus:index';
-const RELATION_META_KEY = 'nebulus:relation';
+export const MODEL_META_KEY = 'nebulus:model';
+export const FIELD_META_KEY = 'nebulus:field';
+export const INDEX_META_KEY = 'nebulus:index';
+export const RELATION_META_KEY = 'nebulus:relation';
 
 // Model options
 export interface ModelOptions {

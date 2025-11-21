@@ -46,7 +46,7 @@ describe('Network Interruption Recovery Tests', () => {
       await db.save();
       // If we get here, the save didn't fail as expected
       // This is acceptable if the implementation has retry logic
-    } catch (error) {
+    } catch (error: any) {
       // Expected error on first attempt
       expect(error.message).toContain('Network connection lost');
 
@@ -89,7 +89,7 @@ describe('Network Interruption Recovery Tests', () => {
       newDb = createDb({ adapter });
       // If we get here, the load didn't fail as expected
       // This is acceptable if the implementation has retry logic
-    } catch (error) {
+    } catch (error: any) {
       // Expected error on first attempt
       expect(error.message).toContain('Network connection lost');
 
@@ -176,7 +176,7 @@ describe('Network Interruption Recovery Tests', () => {
       await users.find({ age: { $gt: 25 } });
       // If we get here, the query didn't fail as expected
       // This is acceptable if the implementation has retry logic
-    } catch (error) {
+    } catch (error: any) {
       // Expected error on first attempt
       expect(error.message).toContain('Network connection lost');
 
@@ -214,7 +214,7 @@ describe('Network Interruption Recovery Tests', () => {
       ]);
       // If we get here, the operation completed before the timeout
       // This is unlikely with our setup but possible
-    } catch (error) {
+    } catch (error: any) {
       // Expected timeout error
       expect(error.message).toContain('timed out');
 
