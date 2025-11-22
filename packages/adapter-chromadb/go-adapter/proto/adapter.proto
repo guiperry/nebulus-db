@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package nebulusdb.adapter;
 
-option go_package = "github.com/nebulus-db/adapter-chromadb/proto";
+option go_package = "github.com/nebulus-db/packages/adapter-chromadb/proto";
 
 service ChromemAdapter {
   rpc Load(LoadRequest) returns (LoadResponse);

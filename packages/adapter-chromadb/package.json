@@ -1,5 +1,5 @@
 {
-  "name": "@nebulus-db/adapter-chromadb",
+  "name": "adapter-chromadb",
   "version": "0.2.3",
   "description": "chromadb adapter for NebulusDB",
   "main": "dist/index.js",

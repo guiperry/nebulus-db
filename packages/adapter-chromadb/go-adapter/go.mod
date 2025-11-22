@@ -1,4 +1,4 @@
-module github.com/nebulus-db/adapter-chromadb
+module github.com/nebulus-db/packages/adapter-chromadb
 
 go 1.21
 

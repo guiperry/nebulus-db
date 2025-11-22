@@ -1099,7 +1099,7 @@ syntax = "proto3";
 
 package nebulusdb.adapter;
 
-option go_package = "github.com/nebulus-db/adapter-chromadb/proto";
+option go_package = "github.com/nebulus-db/packages/adapter-chromadb/proto";
 
 service ChromemAdapter {
   rpc Load(LoadRequest) returns (LoadResponse);
@@ -1192,8 +1192,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/nebulus-db/adapter-chromadb/adapter"
-	pb "github.com/nebulus-db/adapter-chromadb/proto"
+	"github.com/nebulus-db/packages/adapter-chromadb/adapter"
+	pb "github.com/nebulus-db/packages/adapter-chromadb/proto"
 )
 
 type Server struct {
@@ -1983,7 +1983,7 @@ Add to `packages/adapter-chromadb/package.json`:
 Create `packages/adapter-chromadb/go-adapter/go.mod`:
 
 ```go
-module github.com/nebulus-db/adapter-chromadb
+module github.com/nebulus-db/packages/adapter-chromadb
 
 go 1.21
 

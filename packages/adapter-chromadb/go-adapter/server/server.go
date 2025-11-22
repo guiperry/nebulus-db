@@ -8,8 +8,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/nebulus-db/adapter-chromadb/adapter"
-	pb "github.com/nebulus-db/adapter-chromadb/proto"
+	"github.com/nebulus-db/packages/adapter-chromadb/adapter"
+	pb "github.com/nebulus-db/packages/adapter-chromadb/proto"
 )
 
 type Server struct {
