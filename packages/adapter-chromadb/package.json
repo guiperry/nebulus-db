@@ -24,12 +24,18 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "chromadb": "^1.8.1"
+    "chromadb": "^1.8.1",
+    "openai": "^4.0.0",
+    "cohere-ai": "^7.0.0",
+    "axios": "^1.6.0",
+    "@grpc/grpc-js": "^1.10.0",
+    "@grpc/proto-loader": "^0.7.10"
   },
   "devDependencies": {
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.1",
+    "@types/node": "^20.0.0"
   },
   "peerDependencies": {
     "@nebulus-db/core": "^0.2.0"

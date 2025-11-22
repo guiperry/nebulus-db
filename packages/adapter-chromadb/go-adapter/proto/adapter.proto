@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package nebulusdb.adapter;
+
+option go_package = "github.com/nebulus-db/adapter-chromadb/proto";
+
+service ChromemAdapter {
+  rpc Load(LoadRequest) returns (LoadResponse);
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc VectorSearch(VectorSearchRequest) returns (VectorSearchResponse);
+  rpc ConfigureCollection(ConfigureCollectionRequest) returns (ConfigureCollectionResponse);
+  rpc Close(CloseRequest) returns (CloseResponse);
+}
+
+message LoadRequest {}
+
+message LoadResponse {
+  map<string, DocumentList> data = 1;
+}
+
+message DocumentList {
+  repeated Document documents = 1;
+}
+
+message Document {
+  string id = 1;
+  string text = 2;
+  repeated double embedding = 3;
+  map<string, string> data = 4;
+}
+
+message SaveRequest {
+  map<string, DocumentList> data = 1;
+}
+
+message SaveResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message VectorSearchRequest {
+  string collection_name = 1;
+  string query_text = 2;
+  int32 limit = 3;
+  map<string, string> filter = 4;
+}
+
+message VectorSearchResponse {
+  repeated VectorSearchResult results = 1;
+}
+
+message VectorSearchResult {
+  Document document = 1;
+  double distance = 2;
+  double score = 3;
+}
+
+message ConfigureCollectionRequest {
+  string collection_name = 1;
+  CollectionConfig config = 2;
+}
+
+message CollectionConfig {
+  string embedding_model = 1;
+  string embedding_provider = 2;
+  string distance_function = 3;
+  string text_field = 4;
+  map<string, string> hnsw_config = 5;
+}
+
+message ConfigureCollectionResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message CloseRequest {}
+
+message CloseResponse {
+  bool success = 1;
+}

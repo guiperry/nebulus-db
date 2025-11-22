@@ -1,6 +1,26 @@
 import { Adapter, Document } from '@nebulus-db/core';
 import { ChromaClient } from 'chromadb';
 
+// Vector search components
+export { ChromaVectorAdapter } from './vector-adapter';
+export { VectorCollection } from './vector-collection';
+export { ChromemGrpcAdapter } from './grpc-bridge';
+
+// Embedding functions
+export { OpenAIEmbeddingFunction } from './embeddings/openai';
+export { OllamaEmbeddingFunction } from './embeddings/ollama';
+export { CohereEmbeddingFunction } from './embeddings/cohere';
+
+// Types and interfaces
+export type {
+  Embedding,
+  VectorDocument,
+  VectorSearchResult,
+  VectorQueryOptions,
+  VectorCollectionConfig
+} from './vector-types';
+export { DistanceFunction } from './vector-types';
+
 /**
  * Options for ChromadbAdapter
  */
